@@ -1,9 +1,6 @@
-<!--
-title: 【twitter】api自動投稿 github actionsがおススメ
-tags: twitter,api,github-actions
-id: 
-private: false
--->
+【twitter】api自動投稿 github actionsがおススメ
+twitter,api,github-actions
+twitter-github-action
 
 こんにちは。今回は、twitterで月5万、安定収入を稼ぐ方法を知りたい人に向けて、api自動投稿についてお伝えします。
 
