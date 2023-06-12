@@ -1,30 +1,31 @@
-twitter-github-action.md
+typescript-about.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【twitter】API自動投稿 Github Actionsがおススメ
+【基礎】ゼロからtypescript案件を獲る方法
 
 ・キーワードを下記にしてください。
-twitter,api,github-actions,自動化,ネット、稼ぐ、マネタイズ、不労所得、実践、安定収入, 有料化、無料
+typescript,案件獲得
 
 ・対象者を下記にしてください。
-  Twitterで月5万、安定収入を稼ぐ方法を知りたい人を対象
+  typescriptについて初心者エンジニアを対象
 
 
 ・日本語で、必ず3,000文字以上で作ってください。
 
 冒頭は、下記で作成してください。
 「こんにちは。今回は、
-Twitterで月5万、安定収入を稼ぐ方法を知りたい人
+typescriptについて初心者エンジニア
 に向けて、」
 
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## Github Actionsとは
-## Twitter + Github Actionsがおススメな理由
-## 実際の導入方法
-## 具体的に活用していく上での日常タスク
-## まとめ
+## typescriptが何なのか知る
+## typescriptの特徴を知る
+## 従来のプログラミング言語との違い
+## なぜ今typescript案件が多くなってるのか？
+## 実際のtypescript案件を見てみる
+## 案件が対応できるかの考察
 
 ・markdown表記してください。
 
