@@ -51,26 +51,6 @@ th {
 		</tr>
 	</tbody>
 </table>
-	<h4>[2] お申込プラン</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>□エキスパートプラン</td>
-		</tr>
-		<tr>
-			<td>□チャレンジプラン</td>
-		</tr>
-		<tr>
-			<td>□レギュラーAプラン</td>
-		</tr>
-		<tr>
-			<td>□レギュラーBプラン</td>
-		</tr>
-		<tr>
-			<td>□お試しプラン</td>
-		</tr>
-	</tbody>
-</table>
 	<h4>[3] お申込者情報</h4>
 <table>
 	<tbody>
