@@ -1,10 +1,10 @@
-typescript-about.md
+typescript-playground.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【基礎】ゼロからtypescript案件を獲る方法
+【TypeScript】Playgroundを使って学ぶ、型の使い方とデバッグテクニック
 
 ・キーワードを下記にしてください。
-typescript,案件獲得
+typescript,playground
 
 ・対象者を下記にしてください。
   typescriptについて初心者エンジニアを対象
@@ -20,12 +20,11 @@ typescriptについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## typescriptが何なのか知る
-## typescriptの特徴を知る
-## 従来のプログラミング言語との違い
-## なぜ今typescript案件が多くなってるのか？
-## 実際のtypescript案件を見てみる
-## 案件が対応できるかの考察
+## TypeScript Playgroundとは何か？
+## Playgroundで型の使い方を学ぶ
+## Playgroundでデバッグテクニックを磨く
+## 使い方についてのヒントとコツ
+## より良いコードを書くためのアドバイス
 
 ・markdown表記してください。
 
