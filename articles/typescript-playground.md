@@ -1,9 +1,6 @@
-<!--
-title: 【typescript】playgroundを使って学ぶ、型の使い方とデバッグテクニック
-tags: typescript,playground
-id: 
-private: false
--->
+【typescript】playgroundを使って学ぶ、型の使い方とデバッグテクニック
+typescript,playground
+typescript-playground
 
 こんにちは。今回は、typescriptについて初心者エンジニアに向けて、playgroundを利用した型の使い方とデバッグテクニックについて解説したいと思います。
 
