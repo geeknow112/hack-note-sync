@@ -1,4 +1,4 @@
-title: reactとtypescriptを使って、より安全なwebアプリケーションを構築する方法
+reactとtypescriptを使って、より安全なwebアプリケーションを構築する方法
 typescript,react
 typescript-react
 
