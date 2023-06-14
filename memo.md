@@ -1,10 +1,10 @@
-typescript-playground.md
+typescript-react.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【TypeScript】Playgroundを使って学ぶ、型の使い方とデバッグテクニック
+ReactとTypeScriptを使って、より安全なWebアプリケーションを構築する方法
 
 ・キーワードを下記にしてください。
-typescript,playground
+typescript,react
 
 ・対象者を下記にしてください。
   typescriptについて初心者エンジニアを対象
@@ -20,11 +20,11 @@ typescriptについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## TypeScript Playgroundとは何か？
-## Playgroundで型の使い方を学ぶ
-## Playgroundでデバッグテクニックを磨く
-## 使い方についてのヒントとコツ
-## より良いコードを書くためのアドバイス
+## ReactとTypeScriptの組み合わせのメリットとは？
+## TypeScriptを使ったReactコンポーネントの型付けの方法
+## React Hooksの型安全な使用方法について
+## ReduxとTypeScriptを組み合わせたアプリケーションの開発方法
+## ReactとTypeScriptでのテストの書き方と、テストカバレッジの向上について
 
 ・markdown表記してください。
 
