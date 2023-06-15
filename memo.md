@@ -1,10 +1,10 @@
-typescript-react.md
+typescript-install.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-ReactとTypeScriptを使って、より安全なWebアプリケーションを構築する方法
+【TypeScript】インストールする方法とコツ
 
 ・キーワードを下記にしてください。
-typescript,react
+typescript,install
 
 ・対象者を下記にしてください。
   typescriptについて初心者エンジニアを対象
@@ -20,11 +20,12 @@ typescriptについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## ReactとTypeScriptの組み合わせのメリットとは？
-## TypeScriptを使ったReactコンポーネントの型付けの方法
-## React Hooksの型安全な使用方法について
-## ReduxとTypeScriptを組み合わせたアプリケーションの開発方法
-## ReactとTypeScriptでのテストの書き方と、テストカバレッジの向上について
+## npmを使ったTypeScriptのインストール方法
+## TypeScriptの初期設定に必要なファイルと設定方法について
+## JavaScriptとの違いと、TypeScriptが提供する型の種類について
+## TypeScriptを使った開発において避けられない問題と、その解決策について
+## インストールと設定における注意点と、よくあるエラーと対処法
+
 
 ・markdown表記してください。
 
