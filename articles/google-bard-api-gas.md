@@ -1,9 +1,6 @@
-<!--
-title: 【google】bard apiとgasを使ったseoに強い文章作成自動化の手法
-tags: google,bard,api,gas
-id: 
-private: false
--->
+【google】bard apiとgasを使ったseoに強い文章作成自動化の手法
+google,bard,api,gas
+google-bard-api-gas
 
 こんにちは。今回は、google bardについて初心者エンジニアに向けて、bard apiを使ったseoに強い文章作成自動化の手法について解説します。
 
