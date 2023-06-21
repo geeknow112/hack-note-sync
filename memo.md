@@ -1,10 +1,10 @@
-google-bard-api-gas.md
+google-bard-api-js.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【google】BARD APIとGASを使ったSEOに強い文章作成自動化の手法
+【google】BARD APIのjavascriptでの利用
 
 ・キーワードを下記にしてください。
-google,bard,api,gas
+google,bard,api,javascript
 
 ・対象者を下記にしてください。
   Google Bardについて初心者エンジニアを対象
@@ -21,10 +21,10 @@ Google Bardについて初心者エンジニア
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
 ## google bardのAPI利用方法
-## GAS(google action script)でのAPI利用方法
+## javascriptでのAPI利用方法
 ### サンプルコード
-## GASでgoogle bardを呼び出す
-## google のSEOを意識したbardのプロンプト
+## javascriptでgoogle bardを呼び出す
+## 使えるjavascriptのライブラリ
 ### サンプルコード
 ## まとめ
 
