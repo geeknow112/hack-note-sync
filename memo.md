@@ -1,10 +1,10 @@
-google-bard-api-js.md
+google-bard-api-prompt.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【google】BARD APIのjavascriptでの利用
+【google】BARD APIに最適なプロンプト
 
 ・キーワードを下記にしてください。
-google,bard,api,javascript
+google,bard,api,prompt
 
 ・対象者を下記にしてください。
   Google Bardについて初心者エンジニアを対象
@@ -20,12 +20,9 @@ Google Bardについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## google bardのAPI利用方法
-## javascriptでのAPI利用方法
-### サンプルコード
-## javascriptでgoogle bardを呼び出す
-## 使えるjavascriptのライブラリ
-### サンプルコード
+## google bardでのプロンプトについて
+## 最適な解答を得るためのプロンプト
+## chatGPTとgoogle bardのプロンプトの差
 ## まとめ
 
 ・markdown表記してください。
