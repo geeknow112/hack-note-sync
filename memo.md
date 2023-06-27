@@ -1,10 +1,10 @@
-google-bard-api-prompt.md
+google-bard-api-price.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【google】BARD APIに最適なプロンプト
+【google】BARD APIの料金について
 
 ・キーワードを下記にしてください。
-google,bard,api,prompt
+google,bard,api,料金
 
 ・対象者を下記にしてください。
   Google Bardについて初心者エンジニアを対象
@@ -20,10 +20,12 @@ Google Bardについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## google bardでのプロンプトについて
-## 最適な解答を得るためのプロンプト
-## chatGPTとgoogle bardのプロンプトの差
-## まとめ
+## Google BARD APIの基本的な料金プラン
+## APIの使用量に応じた料金設定
+## APIの無料枠について
+## APIの課金方法について
+## APIの料金を抑えるための方法
+## APIを活用するメリットと、料金について考える
 
 ・markdown表記してください。
 
