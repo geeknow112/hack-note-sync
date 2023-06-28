@@ -1,5 +1,6 @@
 別のGitからGithubにリポジトリを移行する方法
 github,git,リポジトリ,python
+github-copy-from-other-git
 
 # 環境
 - Centos
