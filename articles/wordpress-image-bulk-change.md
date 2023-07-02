@@ -1,6 +1,6 @@
-一括でアイキャッチ画像を変更する方法：WordPressでの実践ガイド
+【Wordpress】一括でアイキャッチ画像を変更する方法
 wordpress,画像,一括変換
-wordpress-image-bulk-change.md
+wordpress-image-bulk-change
 
 WordPressでブログを運営していると、アイキャッチ画像の一括変更が必要になることがあります。この記事では、以下の4つのステップでアイキャッチ画像を一括で変更する方法をご紹介します。
 
