@@ -1,4 +1,4 @@
-Pythonで配列に要素を追加する方法
+【Python】配列に要素を追加する方法
 Python,配列,追加
 python-add-array
 
