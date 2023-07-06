@@ -1,4 +1,4 @@
-Python初心者向け：練習問題を解いて学ぶ
+【Python】初心者向け：練習問題を解いて学ぶ
 python,練習問題
 python-exercises
 
