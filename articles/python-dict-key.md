@@ -1,4 +1,4 @@
-Python初心者のためのdict key操作入門ガイド
+【Python】初心者のためのdict key操作入門ガイド
 python,dict-key,初心者
 python-dict-key
 
