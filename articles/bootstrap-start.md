@@ -1,9 +1,6 @@
-<!--
-title: 【bootstrap】webデザイン初心者でも簡単に始められる方法
-tags: bootstrap,webデザイン
-id: 
-private: false
--->
+【bootstrap】webデザイン初心者でも簡単に始められる方法
+bootstrap,webデザイン
+bootstrap-start
 
 ## bootstrapとは？
 
