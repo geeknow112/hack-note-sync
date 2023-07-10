@@ -1,4 +1,4 @@
-PythonのMatplotlibでカラーマップを使ってグラフを描画する方法
+【Python】Matplotlibでカラーマップを使ってグラフを描画する方法
 python,matplotlib,cmap
 python-matplotlib-cmap
 
