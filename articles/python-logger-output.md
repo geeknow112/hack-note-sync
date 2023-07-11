@@ -1,8 +1,6 @@
 【Python】ログを出力する方法
 Python,logger
-ipython-logger-output
-
->本記事は、Python初心者向けに作成されており、基本的な機能にフォーカスしています。上級者の方にはあまり参考にならない場合があります。
+python-logger-output
 
 こんにちは。今回は、Python初心者に向けて、ログを出力する方法について解説します。Pythonには、ログを出力するための標準ライブラリであるloggingが用意されています。
 
