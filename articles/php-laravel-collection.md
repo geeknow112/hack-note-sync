@@ -1,4 +1,4 @@
-Laravelで便利なCollectionの使い方
+【Laravel】便利なCollectionの使い方
 php,laravel,collection
 php-laravel-collection
 
