@@ -1,4 +1,4 @@
-【Laravel】バージョン確認をする方法"
+【Laravel】バージョン確認をする方法
 php,laravel,バージョン確認
 php-laravel-version
 
