@@ -1,59 +1,59 @@
-## ```php
+//  ```php
 $users = DB::table('users')->get();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 DB::table('users')->insert(
     ['name' => 'John Doe', 'email' => 'johndoe@example.com']
 );
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 DB::table('users')
     ->where('id', 1)
     ->update(['votes' => 1]);
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 DB::table('users')->where('votes', '<', 100)->delete();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 php artisan make:model User
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $users = App\Models\User::all();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $user = new App\Models\User;
 $user->name = 'John Doe';
 $user->email = 'johndoe@example.com';
 $user->save();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $user = App\Models\User::find(1);
 $user->votes = 1;
 $user->save();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $user = App\Models\User::find(1);
 $user->delete();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 class User extends Model
 {
     public function posts()
@@ -61,16 +61,16 @@ class User extends Model
         return $this->hasMany(Post::class);
     }
 }
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $user = App\Models\User::find(1);
 $posts = $user->posts;
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 class User extends Model
 {
     public function scopeAdmin($query)
@@ -78,15 +78,15 @@ class User extends Model
         return $query->where('admin', true);
     }
 }
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $admins = App\Models\User::admin()->get();
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 class User extends Model
 {
     public function setNameAttribute($value)
@@ -94,12 +94,12 @@ class User extends Model
         $this->attributes['name'] = strtoupper($value);
     }
 }
-## ```
+//  ```
 
 
-## ```php
+//  ```php
 $user = new App\Models\User;
 $user->name = 'John Doe';
 $user->email = 'johndoe@example.com';
 $user->save();
-## ```
+//  ```
