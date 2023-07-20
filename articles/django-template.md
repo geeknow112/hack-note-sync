@@ -1,6 +1,6 @@
 【django】テンプレートエンジンを使ったwebページの動的生成方法
 python,django
-django-template.md
+django-template
 
 ## djangoのテンプレートエンジンとは？
 
