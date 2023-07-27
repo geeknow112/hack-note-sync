@@ -1,7 +1,7 @@
-gcolab-intro-jupyter.md
+gcolab-data-processing.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【Google Colaboratory】入門：Jupyter Notebookの基本操作と使い方
+【Google Colaboratory】入門：データの読み込みと前処理の基本
 
 ・キーワードを下記にしてください。
 google,colaboratory,python
@@ -20,12 +20,12 @@ Google Colaboratoryについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## Jupyter Notebookとは？
-## Notebookの基本的な使い方とセルの種類
-## ショートカットキーの紹介：便利な操作方法
-## マークダウンセルの使い方：見やすく整形した文章の作成
-## グラフの描画方法：Matplotlibを使った可視化
-## Notebookの共有方法：GitHubやGoogleドライブでの共有方法
+## データの種類：CSV、Excel、JSON、SQLなど
+## データの読み込み方法：Pandasを使ったデータ読み込み
+## データの前処理方法：欠損値、重複、異常値の処理
+## データの加工方法：列の追加、削除、変換
+## データの集計方法：Pandasを使った集計方法
+## データの可視化方法：Matplotlibを使ったグラフの描画
 
 ・サンプルコードを各見出しに用意してください。
 
