@@ -1,5 +1,5 @@
-title: 【amazon connect】顧客満足度を向上させるための使い方
-tags: amazon,connect
+【amazon connect】顧客満足度を向上させるための使い方
+amazon,connect
 aws-connect-customer-satisfaction-usage
 
 # amazon connectについて初心者エンジニアに向けて、顧客満足度を向上させるための使い方
