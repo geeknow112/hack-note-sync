@@ -4,7 +4,7 @@ aws-connect-customer-satisfaction-usage.md
 【Amazon Connect】顧客満足度を向上させるための使い方
 
 ・キーワードを下記にしてください。
-google,colaboratory,python
+amazon,connect,python
 
 ・対象者を下記にしてください。
   Amazon Connect について初心者エンジニアを対象
