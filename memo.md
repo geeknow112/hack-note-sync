@@ -1,7 +1,7 @@
-aws-connect-feature-overview.md
+aws-connect-remote-call-center-setup.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【Amazon Connect】機能解説: ビジネスの効率化と改善に使える
+【Amazon Connect】テレワークに最適なリモートコールセンターの構築手順
 
 ・キーワードを下記にしてください。
 amazon,connect,python
@@ -20,12 +20,12 @@ Amazon Connectについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## IVR自動応答機能の使い方
-## キュー機能の活用方法
-## レポートの見方と分析手順
-## エージェントのスキルと状態設定
-## コンタクトフローの設計手順
-## Amazon Connect CTI Adapterの導入手順
+## Amazon Connectの概要と特徴
+## セットアップに必要なもの
+## Amazon Connectインスタンスの作成手順
+## 電話番号の設定手順
+## キューの作成手順
+## エージェントの追加手順
 
 ・サンプルコードを各見出しに用意してください。
 
