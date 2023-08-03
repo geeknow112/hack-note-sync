@@ -76,3 +76,50 @@ class StockManagement:
 	    blade = set_view()
 	    title = '<p>menu top</p>'
 	    echo(blade.run("menu-top", title=title, msg=msg))
+
+	def get_valid_msg(step_num=None):
+	    app = get_tb()
+	    ve = app.get_valid_element(step_num)
+	
+	    # rakid
+	    validator = Validator()
+	    validator.set_messages({
+	        # 'required': ':attribute を入力してください',
+	        'required': 'を入力してください',
+	        'email': ':email tidak valid',
+	        'min': 'の文字数が不足しています。',
+	        'max': 'が文字数をオーバーしています。',
+	        'regex': 'をカタカナで入力してください。',
+	        'biz_number': 'は、国税庁が指定する13桁の番号で入力してください。',
+	        'goods_image1': 'が選択されていません。',
+	        # etc
+	    })
+	
+	    """
+	    # 項目コピーのradioにチェックが入ってる場合、rulesを削除してValidation不要にする
+	    ve = app.init_validation_rules(_POST, ve)
+	
+	    # 入力欄「その他」のradioにチェックが入ってる場合、rulesを変更してValidationする
+	    ve = app.change_validation_rules(_POST, ve)
+	
+	    # 必須：商品画像①のvalidation追加
+	    if not empty(_FILES) and (step_num == 3):
+	        ve = app.change_file_validation_rules(_POST + _FILES, ve)
+	    """
+	
+	    # make it
+	    validation = validator.make(_POST + _FILES, ve['rules'], ve['messages'])
+	
+	    # then validate
+	    validation.validate()
+	
+	    if validation.fails():
+	        # handling errors
+	        errors = validation.errors()
+	        msg = errors.first_of_all()
+	    else:
+	        # validation passes
+	        msg = {'msg': 'success'}
+	    
+	    return msg
+		
