@@ -122,4 +122,125 @@ class StockManagement:
 	        msg = {'msg': 'success'}
 	    
 	    return msg
+			
+	def goods_detail():
+	    blade = set_view()
+	    get = {}
+	    post = {}
+	
+	    set_tb('Goods')
+	    page = 'goods-detail'
+	
+	    rows = None
+	    action = get.get('action')
+	    if action == 'regist':
+	        tb = Applicant()
+	    else:
+	        initForm = get_tb().get_init_form()
+	        rows = get_tb().get_list()
+	        blade.run("goods-detail")
+	
+	    if action == 'search':
+	        tb = Applicant()
+	        initForm = tb.get_init_form()
+	        rows = tb.get_list(prm)
+	        formPage = 'sales-list'
+	        blade.run("sales-list", rows=rows, formPage=formPage, initForm=initForm)
+	
+	    if action == 'confirm':
+	        if post:
+	            if post['cmd'] == 'cmd_confirm':
+	                msg = get_valid_msg()
+	                rows = post
+	                rows['name'] = post['goods_name']
+	                rows['id'] = rows['goods']
+	                if rows['goods']:
+	                    rows['btn'] = 'update'
+	
+	                if msg['msg'] != 'success':
+	                    rows['messages'] = msg
+	        if rows.get('messages'):
+	            msg = rows['messages']
+	            get['action'] = 'save'
+	        else:
+	            pass
+	        vd([get, post, msg, rows, page])
+	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+	
+	    if action == 'complete':
+	        prm = tb.get_prm()
+	        rows = tb.reg_detail(prm)
+	        blade.run("shop-detail-complete", rows=rows, prm=prm)
+	
+	    if action == 'save':
+	        if post:
+	            if post['cmd'] == 'save':
+	                msg = get_valid_msg()
+	                if msg['msg'] == 'success':
+	                    rows = get_tb().reg_detail(get, post)
+	                    rows['goods_name'] = rows['name']
+	                    get['action'] = 'complete'
+	                else:
+	                    rows = post
+	                    rows['name'] = post['goods_name']
+	                    rows['messages'] = msg
+	        vd(rows)
+	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+	
+	    if action == 'edit-exe':
+	        if post:
+	            if post['cmd'] == 'update':
+	                msg = get_valid_msg()
+	                if msg['msg'] == 'success':
+	                    rows = get_tb().upd_detail(get, post)
+	                    rows['goods_name'] = rows['name']
+	                    get['action'] = 'complete'
+	                else:
+	                    rows = post
+	                    rows['name'] = post['goods_name']
+	                    rows['messages'] = msg
+	        vd(rows)
+	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+	
+	    if action == 'edit':
+	        if get.get('goods'):
+	            rows = get_tb().get_detail_by_goods_code(get['goods'])
+	            rows['goods_name'] = rows['name']
+	            rows['cmd'] = post['cmd'] = 'cmd_update'
+	        else:
+	            msg = get_valid_msg()
+	            rows = post
+	            rows['name'] = post['goods_name']
+	            if msg['msg'] != 'success':
+	                rows['messages'] = msg
+	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+	
+	    if action == 'cancel':
+	        prm = get
+	        del post
+	        tb = Applicant()
+	        rows = tb.get_detail(prm)
+	        p = rows
+	        formPage = 'sales-list'
+	        blade.run("shop-detail", rows=rows, formPage=formPage, prm=prm, p=p)
+	
+	    if action == 'preview':
+	        print('test preview')
+	        app = Applicant()
+	        curUser = app.get_cur_user()
+	        if curUser['roles'] != 'administrator':
+	            applicant = html.escape(get['post'])
+	            row = app.get_detail_by_applicant_code(applicant)
+	        else:
+	            row = None
+	        blade.run("preview", row=row, formPage=formPage, prm=prm, p=p)
+	
+	    if action == 'init-status':
+	        prm = get
+	        del post
+	        applicant = prm['post']
+	        tb = Applicant()
+	        ret = tb.init_status(applicant)
+	        result = 'true' if ret else 'false'
+	        print(f'<script>window.location.href = "{home_url()}/wp-admin/admin.php?page=sales-list&init-status={result}";</script>')
 		
