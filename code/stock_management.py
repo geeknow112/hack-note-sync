@@ -47,3 +47,32 @@ class StockManagement:
 			self.remove_menus()
 			add_action('admin_bar_menu', 'remove_admin_bar_menus', 999)
 		
+	def reload():
+	    global _POST
+	    global p
+	    _POST = {}
+	    p = {}
+	    # echo '<script type="text/javascript">if (window.name != "any") {window.location.reload();window.name = "any";} else {window.name = "";}</script>'
+	
+	def confirm():
+	    blade = set_view()
+	    prm, p, rows = preStepProcess('confirm')
+	    echo(blade.run("shop-detail-confirm", rows=rows, prm=prm))
+	
+	def status():
+	    blade = set_view()
+	    prm, p, rows, step_num = preStepProcess('confirm')
+	    tb = Applicant()
+	    status = tb.getStatusForMenu()
+	    echo(blade.run("shop-detail-status", status=status, step_num=step_num))
+	
+	def set_view():
+	    views = __DIR__ + '/views'
+	    cache = __DIR__ + '/cache'
+	    blade = BladeOne(views, cache, BladeOne.MODE_AUTO)
+	    return blade
+	
+	def menu_top():
+	    blade = set_view()
+	    title = '<p>menu top</p>'
+	    echo(blade.run("menu-top", title=title, msg=msg))
