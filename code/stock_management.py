@@ -244,3 +244,68 @@ class StockManagement:
 	        result = 'true' if ret else 'false'
 	        print(f'<script>window.location.href = "{home_url()}/wp-admin/admin.php?page=sales-list&init-status={result}";</script>')
 		
+	def customer_detail():
+	    blade = set_view()
+	    print(blade.run("customer-detail"))
+	
+	def sales_detail():
+	    blade = set_view()
+	    get = {}
+	    post = {}
+	    # $this->vd($post)
+	    
+	    action = get['action']
+	    if action == 'regist':
+	        tb = Sales()
+	    elif action == 'save':
+	        if post:
+	            get = post
+	            if get['cmd'] == 'save':
+	                get['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
+	                tb = Sales()
+	                rows = tb.updDetail(prm)
+	            
+	            if not get['messages']:
+	                pass
+	                # result = tb.updShopDetail(prm, p)
+	            else:
+	                print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
+	    
+	    elif action == 'edit':
+	        tb = Sales()
+	        initForm = tb.getInitForm()
+	        rows = tb.getDetail(get)
+	        post = rows
+	        formPage = 'sales-list'
+	        print(blade.run("sales-detail", locals()))
+	    
+	    elif action == 'edit-exe':
+	        get = {}
+	        post = {}
+	        # $this->vd($post)
+	        tb = Sales()
+	        if post:
+	            if post['cmd'] == 'save':
+	                post['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
+	                msg = getValidMsg()
+	                # $this->vd($msg)
+	                if msg['msg'] != 'success':
+	                    pass
+	                else:
+	                    rows = tb.updDetail(get, post)
+	            
+	            if not post['messages']:
+	                pass
+	            else:
+	                print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
+	        
+	        rows = tb.getDetail(get)
+	        # $this->vd($rows)
+	        formPage = 'sales-list'
+	        print(blade.run("sales-detail", locals()))
+	    
+	    else:
+	        tb = Sales()
+	        initForm = tb.getInitForm()
+	        formPage = 'sales-list'
+	        print(blade.run("sales-detail", locals()))
