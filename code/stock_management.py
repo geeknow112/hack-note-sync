@@ -309,3 +309,57 @@ class StockManagement:
 	        initForm = tb.getInitForm()
 	        formPage = 'sales-list'
 	        print(blade.run("sales-detail", locals()))
+
+	def lot_regist():
+	    blade = set_view()
+	    get = {}
+	    post = {}
+	    # $this->vd($post)
+	    remove_menus()
+	    
+	    setTb('Sales')
+	    
+	    action = get['action']
+	    if action == 'save':
+		if post:
+		    if post['cmd'] == 'save':
+			msg = getValidMsg(2)
+			if msg['msg'] == 'success':
+			    rows = getTb().updLotDetail(get, post)
+			    get['sales'] = post['sales']
+			    get['goods'] = post['goods']
+			    get['action'] = 'complete'
+			else:
+			    rows = post
+			    rows['messages'] = msg
+	    
+	    elif action == 'confirm':
+		if post:
+		    cmd = post['cmd']
+		    if cmd == 'cmd_confirm':
+			msg = getValidMsg(2)
+			rows = getTb().getLotNumberListBySales(get)
+			plt_id = post['lot_tmp_id']
+			for lot_tmp_id, d in rows.items():
+			    d['tank'] = post['tank'][lot_tmp_id]
+			    d['lot'] = post['lot'][lot_tmp_id]
+			if msg['msg'] != 'success':
+			    rows['messages'] = msg
+	    
+	    elif action == 'edit':
+		if post['sales'] and post['goods']:
+		    post['action'] = get['action']
+		    rows = getTb().getLotNumberListBySales(post)
+		    rows['cmd'] = post['cmd'] = 'cmd_update'
+		else:
+		    msg = getValidMsg()
+		    rows = post
+		    rows['name'] = post['goods_name']
+		    if msg['msg'] != 'success':
+			rows['messages'] = msg
+	    
+	    else:
+		initForm = getTb().getInitForm()
+		rows = getTb().getLotNumberListBySales(get)
+	    
+	    print(blade.run("lot-regist", locals()))
