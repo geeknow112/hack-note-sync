@@ -48,321 +48,321 @@ class StockManagement:
 			add_action('admin_bar_menu', 'remove_admin_bar_menus', 999)
 		
 	def reload():
-	    global _POST
-	    global p
-	    _POST = {}
-	    p = {}
-	    # echo '<script type="text/javascript">if (window.name != "any") {window.location.reload();window.name = "any";} else {window.name = "";}</script>'
+		global _POST
+		global p
+		_POST = {}
+		p = {}
+		# echo '<script type="text/javascript">if (window.name != "any") {window.location.reload();window.name = "any";} else {window.name = "";}</script>'
 	
 	def confirm():
-	    blade = set_view()
-	    prm, p, rows = preStepProcess('confirm')
-	    echo(blade.run("shop-detail-confirm", rows=rows, prm=prm))
+		blade = set_view()
+		prm, p, rows = preStepProcess('confirm')
+		echo(blade.run("shop-detail-confirm", rows=rows, prm=prm))
 	
 	def status():
-	    blade = set_view()
-	    prm, p, rows, step_num = preStepProcess('confirm')
-	    tb = Applicant()
-	    status = tb.getStatusForMenu()
-	    echo(blade.run("shop-detail-status", status=status, step_num=step_num))
+		blade = set_view()
+		prm, p, rows, step_num = preStepProcess('confirm')
+		tb = Applicant()
+		status = tb.getStatusForMenu()
+		echo(blade.run("shop-detail-status", status=status, step_num=step_num))
 	
 	def set_view():
-	    views = __DIR__ + '/views'
-	    cache = __DIR__ + '/cache'
-	    blade = BladeOne(views, cache, BladeOne.MODE_AUTO)
-	    return blade
+		views = __DIR__ + '/views'
+		cache = __DIR__ + '/cache'
+		blade = BladeOne(views, cache, BladeOne.MODE_AUTO)
+		return blade
 	
 	def menu_top():
-	    blade = set_view()
-	    title = '<p>menu top</p>'
-	    echo(blade.run("menu-top", title=title, msg=msg))
+		blade = set_view()
+		title = '<p>menu top</p>'
+		echo(blade.run("menu-top", title=title, msg=msg))
 
 	def get_valid_msg(step_num=None):
-	    app = get_tb()
-	    ve = app.get_valid_element(step_num)
+		app = get_tb()
+		ve = app.get_valid_element(step_num)
 	
-	    # rakid
-	    validator = Validator()
-	    validator.set_messages({
-	        # 'required': ':attribute を入力してください',
-	        'required': 'を入力してください',
-	        'email': ':email tidak valid',
-	        'min': 'の文字数が不足しています。',
-	        'max': 'が文字数をオーバーしています。',
-	        'regex': 'をカタカナで入力してください。',
-	        'biz_number': 'は、国税庁が指定する13桁の番号で入力してください。',
-	        'goods_image1': 'が選択されていません。',
-	        # etc
-	    })
+		# rakid
+		validator = Validator()
+		validator.set_messages({
+			# 'required': ':attribute を入力してください',
+			'required': 'を入力してください',
+			'email': ':email tidak valid',
+			'min': 'の文字数が不足しています。',
+			'max': 'が文字数をオーバーしています。',
+			'regex': 'をカタカナで入力してください。',
+			'biz_number': 'は、国税庁が指定する13桁の番号で入力してください。',
+			'goods_image1': 'が選択されていません。',
+			# etc
+		})
 	
-	    """
-	    # 項目コピーのradioにチェックが入ってる場合、rulesを削除してValidation不要にする
-	    ve = app.init_validation_rules(_POST, ve)
+		"""
+		# 項目コピーのradioにチェックが入ってる場合、rulesを削除してValidation不要にする
+		ve = app.init_validation_rules(_POST, ve)
 	
-	    # 入力欄「その他」のradioにチェックが入ってる場合、rulesを変更してValidationする
-	    ve = app.change_validation_rules(_POST, ve)
+		# 入力欄「その他」のradioにチェックが入ってる場合、rulesを変更してValidationする
+		ve = app.change_validation_rules(_POST, ve)
 	
-	    # 必須：商品画像①のvalidation追加
-	    if not empty(_FILES) and (step_num == 3):
-	        ve = app.change_file_validation_rules(_POST + _FILES, ve)
-	    """
+		# 必須：商品画像①のvalidation追加
+		if not empty(_FILES) and (step_num == 3):
+			ve = app.change_file_validation_rules(_POST + _FILES, ve)
+		"""
 	
-	    # make it
-	    validation = validator.make(_POST + _FILES, ve['rules'], ve['messages'])
+		# make it
+		validation = validator.make(_POST + _FILES, ve['rules'], ve['messages'])
 	
-	    # then validate
-	    validation.validate()
+		# then validate
+		validation.validate()
 	
-	    if validation.fails():
-	        # handling errors
-	        errors = validation.errors()
-	        msg = errors.first_of_all()
-	    else:
-	        # validation passes
-	        msg = {'msg': 'success'}
-	    
-	    return msg
+		if validation.fails():
+			# handling errors
+			errors = validation.errors()
+			msg = errors.first_of_all()
+		else:
+			# validation passes
+			msg = {'msg': 'success'}
+		
+		return msg
 			
 	def goods_detail():
-	    blade = set_view()
-	    get = {}
-	    post = {}
+		blade = set_view()
+		get = {}
+		post = {}
 	
-	    set_tb('Goods')
-	    page = 'goods-detail'
+		set_tb('Goods')
+		page = 'goods-detail'
 	
-	    rows = None
-	    action = get.get('action')
-	    if action == 'regist':
-	        tb = Applicant()
-	    else:
-	        initForm = get_tb().get_init_form()
-	        rows = get_tb().get_list()
-	        blade.run("goods-detail")
+		rows = None
+		action = get.get('action')
+		if action == 'regist':
+			tb = Applicant()
+		else:
+			initForm = get_tb().get_init_form()
+			rows = get_tb().get_list()
+			blade.run("goods-detail")
 	
-	    if action == 'search':
-	        tb = Applicant()
-	        initForm = tb.get_init_form()
-	        rows = tb.get_list(prm)
-	        formPage = 'sales-list'
-	        blade.run("sales-list", rows=rows, formPage=formPage, initForm=initForm)
+		if action == 'search':
+			tb = Applicant()
+			initForm = tb.get_init_form()
+			rows = tb.get_list(prm)
+			formPage = 'sales-list'
+			blade.run("sales-list", rows=rows, formPage=formPage, initForm=initForm)
 	
-	    if action == 'confirm':
-	        if post:
-	            if post['cmd'] == 'cmd_confirm':
-	                msg = get_valid_msg()
-	                rows = post
-	                rows['name'] = post['goods_name']
-	                rows['id'] = rows['goods']
-	                if rows['goods']:
-	                    rows['btn'] = 'update'
+		if action == 'confirm':
+			if post:
+				if post['cmd'] == 'cmd_confirm':
+					msg = get_valid_msg()
+					rows = post
+					rows['name'] = post['goods_name']
+					rows['id'] = rows['goods']
+					if rows['goods']:
+						rows['btn'] = 'update'
 	
-	                if msg['msg'] != 'success':
-	                    rows['messages'] = msg
-	        if rows.get('messages'):
-	            msg = rows['messages']
-	            get['action'] = 'save'
-	        else:
-	            pass
-	        vd([get, post, msg, rows, page])
-	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+					if msg['msg'] != 'success':
+						rows['messages'] = msg
+			if rows.get('messages'):
+				msg = rows['messages']
+				get['action'] = 'save'
+			else:
+				pass
+			vd([get, post, msg, rows, page])
+			blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
 	
-	    if action == 'complete':
-	        prm = tb.get_prm()
-	        rows = tb.reg_detail(prm)
-	        blade.run("shop-detail-complete", rows=rows, prm=prm)
+		if action == 'complete':
+			prm = tb.get_prm()
+			rows = tb.reg_detail(prm)
+			blade.run("shop-detail-complete", rows=rows, prm=prm)
 	
-	    if action == 'save':
-	        if post:
-	            if post['cmd'] == 'save':
-	                msg = get_valid_msg()
-	                if msg['msg'] == 'success':
-	                    rows = get_tb().reg_detail(get, post)
-	                    rows['goods_name'] = rows['name']
-	                    get['action'] = 'complete'
-	                else:
-	                    rows = post
-	                    rows['name'] = post['goods_name']
-	                    rows['messages'] = msg
-	        vd(rows)
-	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+		if action == 'save':
+			if post:
+				if post['cmd'] == 'save':
+					msg = get_valid_msg()
+					if msg['msg'] == 'success':
+						rows = get_tb().reg_detail(get, post)
+						rows['goods_name'] = rows['name']
+						get['action'] = 'complete'
+					else:
+						rows = post
+						rows['name'] = post['goods_name']
+						rows['messages'] = msg
+			vd(rows)
+			blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
 	
-	    if action == 'edit-exe':
-	        if post:
-	            if post['cmd'] == 'update':
-	                msg = get_valid_msg()
-	                if msg['msg'] == 'success':
-	                    rows = get_tb().upd_detail(get, post)
-	                    rows['goods_name'] = rows['name']
-	                    get['action'] = 'complete'
-	                else:
-	                    rows = post
-	                    rows['name'] = post['goods_name']
-	                    rows['messages'] = msg
-	        vd(rows)
-	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+		if action == 'edit-exe':
+			if post:
+				if post['cmd'] == 'update':
+					msg = get_valid_msg()
+					if msg['msg'] == 'success':
+						rows = get_tb().upd_detail(get, post)
+						rows['goods_name'] = rows['name']
+						get['action'] = 'complete'
+					else:
+						rows = post
+						rows['name'] = post['goods_name']
+						rows['messages'] = msg
+			vd(rows)
+			blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
 	
-	    if action == 'edit':
-	        if get.get('goods'):
-	            rows = get_tb().get_detail_by_goods_code(get['goods'])
-	            rows['goods_name'] = rows['name']
-	            rows['cmd'] = post['cmd'] = 'cmd_update'
-	        else:
-	            msg = get_valid_msg()
-	            rows = post
-	            rows['name'] = post['goods_name']
-	            if msg['msg'] != 'success':
-	                rows['messages'] = msg
-	        blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
+		if action == 'edit':
+			if get.get('goods'):
+				rows = get_tb().get_detail_by_goods_code(get['goods'])
+				rows['goods_name'] = rows['name']
+				rows['cmd'] = post['cmd'] = 'cmd_update'
+			else:
+				msg = get_valid_msg()
+				rows = post
+				rows['name'] = post['goods_name']
+				if msg['msg'] != 'success':
+					rows['messages'] = msg
+			blade.run("goods-detail", rows=rows, get=get, post=post, msg=msg)
 	
-	    if action == 'cancel':
-	        prm = get
-	        del post
-	        tb = Applicant()
-	        rows = tb.get_detail(prm)
-	        p = rows
-	        formPage = 'sales-list'
-	        blade.run("shop-detail", rows=rows, formPage=formPage, prm=prm, p=p)
+		if action == 'cancel':
+			prm = get
+			del post
+			tb = Applicant()
+			rows = tb.get_detail(prm)
+			p = rows
+			formPage = 'sales-list'
+			blade.run("shop-detail", rows=rows, formPage=formPage, prm=prm, p=p)
 	
-	    if action == 'preview':
-	        print('test preview')
-	        app = Applicant()
-	        curUser = app.get_cur_user()
-	        if curUser['roles'] != 'administrator':
-	            applicant = html.escape(get['post'])
-	            row = app.get_detail_by_applicant_code(applicant)
-	        else:
-	            row = None
-	        blade.run("preview", row=row, formPage=formPage, prm=prm, p=p)
+		if action == 'preview':
+			print('test preview')
+			app = Applicant()
+			curUser = app.get_cur_user()
+			if curUser['roles'] != 'administrator':
+				applicant = html.escape(get['post'])
+				row = app.get_detail_by_applicant_code(applicant)
+			else:
+				row = None
+			blade.run("preview", row=row, formPage=formPage, prm=prm, p=p)
 	
-	    if action == 'init-status':
-	        prm = get
-	        del post
-	        applicant = prm['post']
-	        tb = Applicant()
-	        ret = tb.init_status(applicant)
-	        result = 'true' if ret else 'false'
-	        print(f'<script>window.location.href = "{home_url()}/wp-admin/admin.php?page=sales-list&init-status={result}";</script>')
+		if action == 'init-status':
+			prm = get
+			del post
+			applicant = prm['post']
+			tb = Applicant()
+			ret = tb.init_status(applicant)
+			result = 'true' if ret else 'false'
+			print(f'<script>window.location.href = "{home_url()}/wp-admin/admin.php?page=sales-list&init-status={result}";</script>')
 		
 	def customer_detail():
-	    blade = set_view()
-	    print(blade.run("customer-detail"))
+		blade = set_view()
+		print(blade.run("customer-detail"))
 	
 	def sales_detail():
-	    blade = set_view()
-	    get = {}
-	    post = {}
-	    # $this->vd($post)
-	    
-	    action = get['action']
-	    if action == 'regist':
-	        tb = Sales()
-	    elif action == 'save':
-	        if post:
-	            get = post
-	            if get['cmd'] == 'save':
-	                get['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
-	                tb = Sales()
-	                rows = tb.updDetail(prm)
-	            
-	            if not get['messages']:
-	                pass
-	                # result = tb.updShopDetail(prm, p)
-	            else:
-	                print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
-	    
-	    elif action == 'edit':
-	        tb = Sales()
-	        initForm = tb.getInitForm()
-	        rows = tb.getDetail(get)
-	        post = rows
-	        formPage = 'sales-list'
-	        print(blade.run("sales-detail", locals()))
-	    
-	    elif action == 'edit-exe':
-	        get = {}
-	        post = {}
-	        # $this->vd($post)
-	        tb = Sales()
-	        if post:
-	            if post['cmd'] == 'save':
-	                post['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
-	                msg = getValidMsg()
-	                # $this->vd($msg)
-	                if msg['msg'] != 'success':
-	                    pass
-	                else:
-	                    rows = tb.updDetail(get, post)
-	            
-	            if not post['messages']:
-	                pass
-	            else:
-	                print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
-	        
-	        rows = tb.getDetail(get)
-	        # $this->vd($rows)
-	        formPage = 'sales-list'
-	        print(blade.run("sales-detail", locals()))
-	    
-	    else:
-	        tb = Sales()
-	        initForm = tb.getInitForm()
-	        formPage = 'sales-list'
-	        print(blade.run("sales-detail", locals()))
+		blade = set_view()
+		get = {}
+		post = {}
+		# $this->vd($post)
+		
+		action = get['action']
+		if action == 'regist':
+			tb = Sales()
+		elif action == 'save':
+			if post:
+				get = post
+				if get['cmd'] == 'save':
+					get['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
+					tb = Sales()
+					rows = tb.updDetail(prm)
+				
+				if not get['messages']:
+					pass
+					# result = tb.updShopDetail(prm, p)
+				else:
+					print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
+		
+		elif action == 'edit':
+			tb = Sales()
+			initForm = tb.getInitForm()
+			rows = tb.getDetail(get)
+			post = rows
+			formPage = 'sales-list'
+			print(blade.run("sales-detail", locals()))
+		
+		elif action == 'edit-exe':
+			get = {}
+			post = {}
+			# $this->vd($post)
+			tb = Sales()
+			if post:
+				if post['cmd'] == 'save':
+					post['messages'] = {'error': ['error is _field_company-name.']} # TEST DATA
+					msg = getValidMsg()
+					# $this->vd($msg)
+					if msg['msg'] != 'success':
+						pass
+					else:
+						rows = tb.updDetail(get, post)
+				
+				if not post['messages']:
+					pass
+				else:
+					print('<script>var msg = document.getElementById("msg"); msg.innerHTML = "' + post['messages']['error'][0] + '";</script>')
+			
+			rows = tb.getDetail(get)
+			# $this->vd($rows)
+			formPage = 'sales-list'
+			print(blade.run("sales-detail", locals()))
+		
+		else:
+			tb = Sales()
+			initForm = tb.getInitForm()
+			formPage = 'sales-list'
+			print(blade.run("sales-detail", locals()))
 
 	def lot_regist():
-	    blade = set_view()
-	    get = {}
-	    post = {}
-	    # $this->vd($post)
-	    remove_menus()
-	    
-	    setTb('Sales')
-	    
-	    action = get['action']
-	    if action == 'save':
+		blade = set_view()
+		get = {}
+		post = {}
+		# $this->vd($post)
+		remove_menus()
+		
+		setTb('Sales')
+		
+		action = get['action']
+		if action == 'save':
 		if post:
-		    if post['cmd'] == 'save':
+			if post['cmd'] == 'save':
 			msg = getValidMsg(2)
 			if msg['msg'] == 'success':
-			    rows = getTb().updLotDetail(get, post)
-			    get['sales'] = post['sales']
-			    get['goods'] = post['goods']
-			    get['action'] = 'complete'
+				rows = getTb().updLotDetail(get, post)
+				get['sales'] = post['sales']
+				get['goods'] = post['goods']
+				get['action'] = 'complete'
 			else:
-			    rows = post
-			    rows['messages'] = msg
-	    
-	    elif action == 'confirm':
+				rows = post
+				rows['messages'] = msg
+		
+		elif action == 'confirm':
 		if post:
-		    cmd = post['cmd']
-		    if cmd == 'cmd_confirm':
+			cmd = post['cmd']
+			if cmd == 'cmd_confirm':
 			msg = getValidMsg(2)
 			rows = getTb().getLotNumberListBySales(get)
 			plt_id = post['lot_tmp_id']
 			for lot_tmp_id, d in rows.items():
-			    d['tank'] = post['tank'][lot_tmp_id]
-			    d['lot'] = post['lot'][lot_tmp_id]
+				d['tank'] = post['tank'][lot_tmp_id]
+				d['lot'] = post['lot'][lot_tmp_id]
 			if msg['msg'] != 'success':
-			    rows['messages'] = msg
-	    
-	    elif action == 'edit':
+				rows['messages'] = msg
+		
+		elif action == 'edit':
 		if post['sales'] and post['goods']:
-		    post['action'] = get['action']
-		    rows = getTb().getLotNumberListBySales(post)
-		    rows['cmd'] = post['cmd'] = 'cmd_update'
+			post['action'] = get['action']
+			rows = getTb().getLotNumberListBySales(post)
+			rows['cmd'] = post['cmd'] = 'cmd_update'
 		else:
-		    msg = getValidMsg()
-		    rows = post
-		    rows['name'] = post['goods_name']
-		    if msg['msg'] != 'success':
+			msg = getValidMsg()
+			rows = post
+			rows['name'] = post['goods_name']
+			if msg['msg'] != 'success':
 			rows['messages'] = msg
-	    
-	    else:
+		
+		else:
 		initForm = getTb().getInitForm()
 		rows = getTb().getLotNumberListBySales(get)
-	    
-	    print(blade.run("lot-regist", locals()))
+		
+		print(blade.run("lot-regist", locals()))
 
 	def sum_day_goods(self):
 		self.remove_menus()
