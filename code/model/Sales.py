@@ -162,3 +162,67 @@ def get_list(get=None, un_convert=None):
 					result[day].append(list_)
 
 		return result
+
+	def get_detail(get=None):
+		get = get or {}
+		cur_user = wp_get_current_user()
+		global wpdb
+
+		sql = "SELECT s.* FROM yc_sales as s "
+		sql += "WHERE s.id = '{}'".format(get.get('sales', ''))
+
+		if current(cur_user.roles[0]) != 'administrator':
+			# sql += "AND ap.mail = '" + cur_user.user_email + "'"
+			pass
+
+		sql += "LIMIT 1;"
+		rows = wpdb.get_results(sql)
+
+		return rows[0] if rows else None
+
+
+	def get_detail_by_sales_code(sales=None):
+		global wpdb
+
+		sql = "SELECT s.* FROM {} as s ".format(get_table_name())
+		sql += "WHERE s.id = '{}' ".format(sales)
+		sql += "LIMIT 1;"
+
+		rows = wpdb.get_results(sql)
+		return rows[0] if rows else None
+
+
+	def get_detail_by_applicant_code(applicant=None):
+		global wpdb
+		# $this->vd($applicant);exit;
+
+		sql = "SELECT ap.* FROM {} as ap ".format($wpdb->prefix."applicant")
+		sql += "WHERE ap.applicant = '{}' ".format(applicant)
+		sql += "LIMIT 1;"
+
+		rows = wpdb.get_results(sql)
+		return rows[0] if rows else None
+
+
+	def get_lot_number_list_by_sales(get=None):
+		get = get or {}
+		cur_user = wp_get_current_user()
+		global wpdb
+
+		sql = "SELECT s.id, s.ship_addr, s.arrival_dt, s.name, g.goods, g.name as goods_name, g.qty as goods_qty, gd.id as lot_tmp_id, gd.lot, gd.tank "
+		sql += "FROM yc_sales as s "
+		sql += "LEFT JOIN yc_goods as g ON s.goods = g.goods "
+		sql += "LEFT JOIN yc_goods_detail as gd on s.id = gd.sales "
+		sql += "WHERE s.id is not null "
+		sql += "AND gd.id is not null "
+
+		if get.get('action') in ['save', 'confirm', 'edit', 'complete']:
+			sql += "AND s.id = {} and g.goods = {} ".format(get.get('sales', 0), get.get('goods', 0))
+
+		rows = wpdb.get_results(sql)
+
+		conv = {}
+		for row in rows:
+			conv[row.lot_tmp_id] = row
+
+		return conv
