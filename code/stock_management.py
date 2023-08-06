@@ -363,3 +363,94 @@ class StockManagement:
 		rows = getTb().getLotNumberListBySales(get)
 	    
 	    print(blade.run("lot-regist", locals()))
+
+	def sum_day_goods(self):
+		self.remove_menus()
+		blade = self.set_view()
+		print(blade.run("sum-day-goods"))
+
+	def goods_list(self):
+		blade = self.set_view()
+		get = {}
+		post = {}
+
+		get['action'] = 'search'
+		if get['action'] == 'search':
+			tb = Goods()
+			initForm = tb.getInitForm()
+			rows = tb.getList(get, un_convert=True)
+			formPage = 'goods-list'
+			print(blade.run("goods-list", rows=rows, formPage=formPage, initForm=initForm))
+
+	def customer_list(self):
+		blade = self.set_view()
+		get = {}
+		post = {}
+
+		get['action'] = 'search'
+		if get['action'] == 'search':
+			tb = Customer()
+			initForm = tb.getInitForm()
+			rows = tb.getList(get, un_convert=True)
+			formPage = 'customer-list'
+			print(blade.run("customer-list", rows=rows, formPage=formPage, initForm=initForm))
+
+	def sales_list(self):
+		blade = self.set_view()
+		get = {}
+		post = {}
+
+		self.setTb('Sales')
+
+		if post['cmd'] == 'search' or post['cmd'] == 'edit':
+			ret = self.getTb().changeStatus(post['change_status'], post['no'])
+			self.getTb().makeLotSpace(get, post)
+
+		initForm = self.getTb().getInitForm()
+		rows = self.getTb().getList(get, un_convert=True)
+		formPage = 'sales-list'
+		print(blade.run("sales-list", rows=rows, formPage=formPage, initForm=initForm))
+
+	def delivery_graph(self):
+		blade = self.set_view()
+		get = {}
+		post = {}
+
+		self.setTb('Sales')
+
+		get['action'] = 'search'
+		if get['action'] == 'search':
+			initForm = self.getTb().getInitForm()
+			rows = self.getTb().getList(get)
+			formPage = 'delivery-graph'
+			print(blade.run("delivery-graph", rows=rows, formPage=formPage, initForm=initForm))
+
+	def setTb(self, modelClassName=None):
+		self._tb = modelClassName
+
+	def getTb(self):
+		return self._tb
+
+	def remove_menus(self):
+		# remove_menu_page('index.php')  # ダッシュボード
+		# remove_menu_page('profile.php')  # プロフィール
+		# remove_menu_page('edit.php')  # 投稿メニュー
+		# remove_menu_page('upload.php')  # メディア
+		# remove_menu_page('edit.php?post_type=page')  # 固定ページ
+		# remove_menu_page('edit-comments.php')  # コメント
+		# remove_menu_page('themes.php')  # 外観
+		# remove_menu_page('plugins.php')  # プラグイン
+		# remove_menu_page('tools.php')  # ツールメニュー
+		# remove_menu_page('options-general.php')  # 設定
+		pass
+
+	def vd(self, d):
+		cur_user = wp_get_current_user()
+		if current(cur_user.roles) == 'administrator':
+			print('<div class="border border-success mb-3">')
+			print('<pre>')
+			print_r(d)
+			print('</pre>')
+			print('</div>')
+
+StockManagement = StockManagement()
