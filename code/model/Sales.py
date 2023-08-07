@@ -282,3 +282,81 @@ def get_list(get=None, un_convert=None):
 			ret.append(wpdb.update('yc_goods_detail', d, {'id': id}))
 
 		return True
+
+	def make_lot_space(get=None, post=None):
+		post = type('', (), post)
+		global wpdb
+
+		exec_status = get_parts_status().index('確定')
+		curr_status = int(post.change_status)
+		if exec_status != curr_status:
+			return False
+
+		vd(post)
+		exit()
+
+		rep_sqls = []
+		for i, sales in enumerate(post.no):
+			if not sales:
+				rep_sqls.append(
+					f"SELECT * FROM yc_schedule_repeat AS sc LEFT JOIN yc_sales AS s ON sc.sales = s.id WHERE sc.repeat = {post.arr_repeat[i]} LIMIT 1;"
+				)
+
+		rep_rets = []
+		for i, rep_sql in enumerate(rep_sqls):
+			rep_rets.append(wpdb.get_results(rep_sql)[0])
+
+		reg_rets = []
+		for i, d in enumerate(rep_rets):
+			d.id = None
+			d.delivery_dt = post.arr_delivery_dt[i]
+			reg_rets.append(reg_detail(get, d))
+
+		for i, data in enumerate(reg_rets):
+			post.no.append(data.id)
+
+		sqls = {}
+		for sales in post.no:
+			sqls[sales] = f"SELECT count(*) as count FROM yc_goods_detail as gd WHERE gd.sales = {sales} AND gd.goods = {post.arr_goods[sales]} LIMIT 1;"
+
+		rets = {}
+		for sales, sql in sqls.items():
+			rets[sales] = wpdb.get_results(sql)[0]
+
+		results = {}
+		for sales, d in rets.items():
+			if d.count == 0:
+				loop = int(post.arr_qty[sales]) / 0.5
+				results[sales] = []
+				for j in range(loop):
+					results[sales].append(wpdb.insert(
+						'yc_goods_detail',
+						{
+							'id': None,
+							'sales': sales,
+							'goods': post.arr_goods[sales],
+							'lot': None,
+							'tank': None,
+							'rgdt': None,
+							'updt': None,
+							'upuser': None,
+						},
+						['%s', '%s', '%d', '%s']
+					))
+
+		vd(results)
+
+		upd_ret = {}
+		for sales, ret in results.items():
+			upd_ret[sales] = wpdb.update(
+				get_table_name(),
+				{
+					'id': sales,
+					'lot_fg': get_parts_lot_fg().index('未登録')
+				},
+				{'id': sales}
+			)
+
+		vd(upd_ret)
+
+		return True
