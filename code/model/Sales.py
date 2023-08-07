@@ -226,3 +226,59 @@ def get_list(get=None, un_convert=None):
 			conv[row.lot_tmp_id] = row
 
 		return conv
+
+	def reg_detail(get=None, post=None):
+		global wpdb
+		cur_user = get_cur_user()
+
+		exist_columns = wpdb.get_col("DESC " + get_table_name() + ";", 0)
+		data = {}
+		for i, col in enumerate(exist_columns):
+			if col in post and post[col]:
+				data[col] = post[col]
+
+		data['repeat_fg'] = 0
+
+		ret = wpdb.insert(get_table_name(), data)
+
+		sales = wpdb.insert_id
+
+		rows = get_detail_by_sales_code(sales)
+		vd(rows)
+		return rows
+
+
+	def upd_detail(get=None, post=None):
+		post = {k: v for k, v in post.items()}
+		global wpdb
+
+		exist_columns = wpdb.get_col("DESC " + get_table_name() + ";", 0)
+		data = {}
+		for i, col in enumerate(exist_columns):
+			if col in post and post[col]:
+				data[col] = post[col]
+
+		vd(data)
+
+		ret = wpdb.update(get_table_name(), data, {'id': post['sales']})
+
+		return True
+
+
+	def upd_lot_detail(get=None, post=None):
+		post = {k: v for k, v in post.items()}
+		global wpdb
+
+		data = {}
+		for id in post['lot_tmp_id']:
+			data[id] = {
+				'id': id,
+				'tank': post['tank'][id],
+				'lot': post['lot'][id]
+			}
+
+		ret = []
+		for id, d in data.items():
+			ret.append(wpdb.update('yc_goods_detail', d, {'id': id}))
+
+		return True
