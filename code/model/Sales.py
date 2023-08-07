@@ -432,3 +432,91 @@ def get_list(get=None, un_convert=None):
 				'status': get_parts_status(),
 			}
 		}
+
+	def get_parts_order_name():
+		return {
+			0: '',
+			1: '顧客①',
+			2: '顧客②',
+		}
+
+
+	def get_parts_car_model():
+		return {
+			0: '',
+			1: '6t-1',
+			2: '6t-2',
+			3: '6t-3',
+			4: '6t-4',
+			5: '6t-5',
+		}
+
+
+	def get_parts_goods_name():
+		return {
+			0: '',
+			10: '商品①',
+			20: '商品②',
+			30: '商品③',
+			40: '商品④',
+			50: '商品⑤',
+		}
+
+
+	def get_parts_ship_addr():
+		return {
+			0: '',
+			10: '配送先①',
+			20: '配送先②',
+			30: '配送先③',
+			40: '配送先④',
+			50: '配送先⑤',
+		}
+
+
+	def get_parts_qty():
+		return {
+			0: '',
+			1: '1',
+			2: '2',
+			3: '3',
+			4: '4',
+			5: '5',
+			6: '6',
+		}
+
+
+	def get_parts_outgoing_warehouse():
+		return {
+			0: '',
+			1: '出庫倉庫①',
+			2: '出庫倉庫②',
+		}
+
+
+	def get_parts_status():
+		return {
+			'': '',
+			0: '未確定',
+			1: '確定',
+			2: '削除',
+		}
+
+
+	def get_parts_lot_fg():
+		return {
+			'': '',
+			0: '未作成',
+			1: '未登録',
+			2: '登録済',
+		}
+
+
+	def get_parts_period():
+		return {
+			'': '',
+			0: '毎日',
+			1: '毎週',
+			2: '毎月',
+			3: '毎年',
+		}
