@@ -360,3 +360,75 @@ def get_list(get=None, un_convert=None):
 		vd(upd_ret)
 
 		return True
+
+	def upd_lot_fg(rows=None):
+		global wpdb
+		check_arr = []
+		for tmp_lot_id, d in rows.items():
+			sales = d.id
+			check_arr.append(d.lot)
+
+		# vd(check_arr)
+		if 0 in check_arr or None in check_arr:
+			lot_fg = 1
+		else:
+			lot_fg = 2
+
+		ret = wpdb.update(
+			get_table_name(),
+			{
+				'id': sales,
+				'lot_fg': lot_fg,
+			},
+			{'id': sales}
+		)
+
+		return ret
+
+
+	def change_status(change_status=None, object_no=None):
+		global wpdb
+		data = {}
+		for i, sales in enumerate(object_no):
+			data[sales] = {
+				'id': sales,
+				'status': change_status
+			}
+
+		# vd(data)
+		ret = []
+		for sales, d in data.items():
+			ret.append(wpdb.update(
+				get_table_name(),
+				d,
+				{'id': sales}
+			))
+
+		return True
+
+
+	def vd(d):
+		# return False
+		global wpdb
+		cur_user = wp_get_current_user()
+		if 'administrator' in cur_user.roles:
+			print('<div class="border border-success mb-3">')
+			print('<pre>')
+			# var_dump(d)
+			print_r(d)
+			print('</pre>')
+			print('</div>')
+
+
+	def get_init_form():
+		return {
+			'select': {
+				'order_name': get_parts_order_name(),
+				'car_model': get_parts_car_model(),
+				'goods_name': get_parts_goods_name(),
+				'ship_addr': get_parts_ship_addr(),
+				'qty': get_parts_qty(),
+				'outgoing_warehouse': get_parts_outgoing_warehouse(),
+				'status': get_parts_status(),
+			}
+		}
