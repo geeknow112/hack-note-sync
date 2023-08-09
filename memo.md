@@ -1,7 +1,7 @@
-gcolab-rl-basics.md
+gcolab-api-web-scraping.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【Google Colaboratory】入門：強化学習の基礎と簡単なモデルの作成
+【Google Colaboratory】入門：GoogleのAPIを使った自動化とWebスクレイピングの基礎
 
 ・キーワードを下記にしてください。
 google,colaboratory,python
@@ -20,12 +20,12 @@ Google Colaboratoryについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## 強化学習とは？
-## Google Colaboratoryの概要
-## 強化学習の基本原理
-## 簡単な強化学習モデルの作成手順
-## Google Colaboratoryでのモデルの実装
-## 結果の評価と改善方法
+## Google Colaboratoryとは？
+## GoogleのAPIの活用方法
+## 自動化の基礎とは？
+## Webスクレイピングの概要
+## Google Colaboratoryでの自動化とWebスクレイピングの実装
+## データ収集と処理の最適化手法
 
 ・サンプルコードを各見出しに用意してください。
 
