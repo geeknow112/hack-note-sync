@@ -1,7 +1,7 @@
-tradingview-backtesting-feature.md
+tradingview-script-editor.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【TradingView】バックテスト機能の活用と戦略の評価方法
+【TradingView】スクリプトエディターの使い方と自動売買戦略の作成
 
 ・キーワードを下記にしてください。
 tradingview,python,pine
