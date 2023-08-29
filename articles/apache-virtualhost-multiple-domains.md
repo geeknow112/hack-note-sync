@@ -1,9 +1,6 @@
-<!--
-title: 【apache】virtualhost設定：複数ドメインのブログをホストしよう
-tags: apache,virtualhost
-id: 
-private: false
--->
+【apache】virtualhost設定：複数ドメインのブログをホストしよう
+apache,virtualhost
+apache-virtualhost-multiple-domains
 
 ## 複数ドメインの仮想ホストの設定手順
 
