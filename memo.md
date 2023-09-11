@@ -1,7 +1,7 @@
-apache_virtualhost_ssl_multiple_domains.md
+apache_virtualhost_secure_blog_aws_lightsail.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【Apache】VirtualHostを使用して複数ドメインのSSL対応サイトを構築する方法
+【Apache】AWS Lightsail上で安全なブログホスティング環境を構築するためのApache VirtualHostの設定方法
 
 ・キーワードを下記にしてください。
 apache,virtualhost,AWS,lightsail,let's_encrypt,SSL
@@ -20,11 +20,11 @@ Apacheについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## VirtualHostと複数ドメインの関連付け方法
-## SSL証明書の取得と設定手順
-## 複数ドメインのHTTPSリダイレクト設定方法
-## サブドメインごとの設定とSSL対応
-## サイトごとのカスタム設定とドメイン別のリソース管理
+## AWS LightsailにおけるApacheのセットアップと基本設定
+## 安全なブログホスティング環境の要件とセキュリティ対策
+## Apache VirtualHostの設定手順とディレクトリ構造の作成
+## SSL/TLSの導入とLet's Encryptによる証明書の取得方法
+## ログ管理とモニタリング：アクセスログとエラーログの分析と保護
 
 ・サンプルコードを各見出しに用意してください。
 
