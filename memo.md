@@ -1,7 +1,7 @@
-apache_virtualhost_secure_blog_aws_lightsail.md
+apache_virtualhost_ssl_auto_renewal.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【Apache】AWS Lightsail上で安全なブログホスティング環境を構築するためのApache VirtualHostの設定方法
+【Apache】VirtualHostとLet's Encryptを使ったSSL証明書の自動更新方法
 
 ・キーワードを下記にしてください。
 apache,virtualhost,AWS,lightsail,let's_encrypt,SSL
@@ -20,11 +20,11 @@ Apacheについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## AWS LightsailにおけるApacheのセットアップと基本設定
-## 安全なブログホスティング環境の要件とセキュリティ対策
-## Apache VirtualHostの設定手順とディレクトリ構造の作成
-## SSL/TLSの導入とLet's Encryptによる証明書の取得方法
-## ログ管理とモニタリング：アクセスログとエラーログの分析と保護
+## Let's Encryptと自動更新：SSL証明書の重要性とメリット
+## Certbotを使用した自動更新の設定手順
+## Apache VirtualHostの確認と設定の自動化
+## クーロンジョブを使った定期的な自動更新のスケジューリング
+## 自動更新の監視とエラーハンドリング：更新失敗時の対処方法
 
 ・サンプルコードを各見出しに用意してください。
 
