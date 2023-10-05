@@ -1,7 +1,7 @@
-js_create_selectbox_creation.md
+js_create_selectbox_utilization.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【JavaScript】createSelectBox関数を使ったセレクトボックスの作成方法
+【JavaScript】手軽に選択肢を追加！createSelectBox関数の活用術
 
 ・キーワードを下記にしてください。
 javascript
@@ -20,11 +20,11 @@ Javascriptについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## createSelectBox関数の基本的な使い方と構文
-## セレクトボックスの選択肢を動的に生成する方法
-## セレクトボックスのデフォルト値の設定と初期化手法
-## イベントリスナーを活用したセレクトボックスの操作と反応
-## createSelectBox関数の応用テクニックとカスタマイズ方法
+## createSelectBox関数の導入と基本的な使い方
+## 静的な選択肢の追加方法と表示のカスタマイズ
+## 動的な選択肢の追加と削除の実装手法
+## API連携による選択肢の自動取得と更新方法
+## ユーザビリティ向上のためのUXデザインとcreateSelectBox関数
 
 ・サンプルコードを各見出しに用意してください。
 
