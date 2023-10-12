@@ -1,9 +1,6 @@
-<!--
-title: 【javascript】簡単にrssフィードをパース！ライブラリとテクニック
-tags: javascript,rss
-id: 
-private: false
--->
+【javascript】簡単にrssフィードをパース！ライブラリとテクニック
+javascript,rss
+js_rss_feed_parsing_techniques
 
 ## ライブラリの選定と導入：簡単なrssパーサーの紹介
 
