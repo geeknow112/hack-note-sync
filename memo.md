@@ -1,7 +1,7 @@
-tradingview-pine-functions-parameters.md
+tradingview-pine-conditional-statements.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【TradingView】Pineスクリプト：関数の使用とパラメータ
+【TradingView】Pineスクリプト：条件文と制御フロー
 
 ・キーワードを下記にしてください。
 tradingview,pine
@@ -20,11 +20,11 @@ TradingView Pine Scriptについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## 関数の定義と呼び出し方
-## パラメータの設定とデフォルト値
-## 内部関数と外部関数の違い
-## 関数の戻り値の活用方法
-## ビルトイン関数とカスタム関数の利用法
+## if文の使用と条件式の書き方
+## 複数の条件を組み合わせる方法
+## else文とelseif文の活用法
+## forループと配列の要素処理
+## breakとcontinueの制御フロー
 
 ・サンプルコードを各見出しに用意してください。
 
