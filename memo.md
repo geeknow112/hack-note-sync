@@ -1,7 +1,7 @@
-aws_cli_dynamodb.md
+aws_cli_cloudformation.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【AWS CLI】DynamoDBテーブルの作成とクエリ
+【AWS CLI】CloudFormationスタックの作成と更新
 
 ・キーワードを下記にしてください。
 aws,cli
@@ -20,11 +20,11 @@ AWS CLIについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## AWS CLIを使用したDynamoDBテーブルの作成手順
-## DynamoDBテーブルの属性とキーの設定方法
-## AWS CLIでのDynamoDBテーブルへのデータの挿入と更新
-## DynamoDBテーブルのスキャンとクエリの基本的な使い方
-## AWS CLIを使ったDynamoDBテーブルのインデックスとパーティションキーの設定
+## AWS CLIを使用したCloudFormationスタックの作成手順
+## CloudFormationテンプレートの作成とパラメータの設定方法
+## AWS CLIでのCloudFormationスタックの更新と変更セットの適用
+## CloudFormationスタックのステータスの監視とロールバック処理
+## AWS CLIを使ったCloudFormationスタックの削除とリソースのクリーンアップ
 
 ・サンプルコードを各見出しに用意してください。
 
