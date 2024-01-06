@@ -1,7 +1,7 @@
-aws_cli_cloudformation.md
+aws_cli_iam.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
-【AWS CLI】CloudFormationスタックの作成と更新
+【AWS CLI】IAMユーザーの作成と権限設定
 
 ・キーワードを下記にしてください。
 aws,cli
@@ -20,11 +20,11 @@ AWS CLIについて初心者エンジニア
 ・参考となるブログ記事のURLを2個以上掲載してください。
 
 ・見出しには下記を使ってください。(見出しにはの行頭には ## このタグを置いてください。)
-## AWS CLIを使用したCloudFormationスタックの作成手順
-## CloudFormationテンプレートの作成とパラメータの設定方法
-## AWS CLIでのCloudFormationスタックの更新と変更セットの適用
-## CloudFormationスタックのステータスの監視とロールバック処理
-## AWS CLIを使ったCloudFormationスタックの削除とリソースのクリーンアップ
+## AWS CLIを使用したIAMユーザーの作成手順
+## IAMユーザーのアクセスキーとシークレットアクセスキーの設定方法
+## AWS CLIでのIAMユーザーのグループへの所属とポリシーの割り当て
+## IAMユーザーのパスワードポリシーとMFAの設定
+## AWS CLIを使ったIAMユーザーの一時的な認証情報の取得と管理
 
 ・サンプルコードを各見出しに用意してください。
 
