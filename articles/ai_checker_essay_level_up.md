@@ -1,9 +1,6 @@
-<!--
-title: 【ai】aiでエッセイをレベルアップ：自動チェッカーと執筆支援の力
-tags: ai,checker,essay
-id: 
-private: false
--->
+【ai】aiでエッセイをレベルアップ：自動チェッカーと執筆支援の力
+ai,checker,essay
+ai_checker_essay_level_up
 
 ## 自動チェッカーの活用術：aiがもたらすエッセイの品質向上
 
