@@ -1,4 +1,4 @@
-tax-filing--crypto.md
+tax-filing-crypto.md
 
 ・下記の条件でタイトルと、ブログ記事を書いてください。
 【確定申告】暗号資産の申告方法
