@@ -1,1 +1,2 @@
 print("main")
+print("main")
