@@ -18,6 +18,9 @@ GitHub リポジトリの記事を WordPress に自動同期するシステム
 hack-note-sync/
 ├── articles/           # Markdown記事ファイル
 ├── code/              # サンプルコード
+├── scripts/           # 投稿・修正用スクリプト
+├── tests/             # テスト用スクリプト
+├── utils/             # ユーティリティ関数
 ├── .github/workflows/ # GitHub Actions設定
 ├── sync_to_wordpress.py # メイン同期スクリプト
 ├── config.yaml        # 設定ファイル
