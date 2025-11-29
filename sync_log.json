@@ -2434,5 +2434,26 @@
     "post_id": 15468,
     "last_sync": "2025-11-29T04:17:15.814319",
     "title": "給与明細や振込明細を読み込む処理例"
+  },
+  "aws-lambda-automation-guide.md": {
+    "post_id": 15662,
+    "hash": "5eab7b4235c3ae6086c1640c12244cd4",
+    "created_at": "2025-11-29T16:27:36.872226",
+    "title": "【AWS Lambda】サーバーレス自動化で業務効率を劇的に改善する実践ガイド",
+    "status": "draft"
+  },
+  "docker-production-deployment-best-practices.md": {
+    "post_id": 15663,
+    "hash": "59f28dd881946bd914f87ffabb99b642",
+    "created_at": "2025-11-29T16:27:37.903952",
+    "title": "Docker本番環境デプロイメント完全ガイド：セキュリティとパフォーマンスを両立する実践手法",
+    "status": "draft"
+  },
+  "github_vscode_collaboration_guide.md": {
+    "post_id": 15664,
+    "hash": "27469b6684cdbffb0ada2d164c152dcf",
+    "created_at": "2025-11-29T16:27:38.903120",
+    "title": "【初心者向け】GitHubとVS Codeでチーム開発を効率化する実践ガイド",
+    "status": "draft"
   }
 }

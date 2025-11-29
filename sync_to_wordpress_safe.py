@@ -160,7 +160,7 @@ class SafeWordPressSyncer:
             json.dump(log_data, f, ensure_ascii=False, indent=2)
     
     def post_to_wordpress(self, article_data):
-        """WordPressに記事を下書きとして投稿"""
+        """WordPressに記事を下書きとして投稿（アイキャッチ画像付き）"""
         # カテゴリーID取得
         category_id = self.get_category_id(article_data['category'])
         
@@ -181,7 +181,28 @@ class SafeWordPressSyncer:
             json=post_data
         )
         
+        # 投稿成功時にアイキャッチ画像を設定
+        if response.status_code == 201:
+            post_id = response.json()['id']
+            self.set_featured_image(post_id, article_data['title'])
+        
         return response
+    
+    def set_featured_image(self, post_id, title):
+        """投稿にアイキャッチ画像を自動生成・設定"""
+        from utils.image_generator import ImageGenerator
+        
+        try:
+            image_gen = ImageGenerator(self.wp_url, self.wp_user, self.wp_pass)
+            success = image_gen.generate_featured_image(post_id, title)
+            
+            if success:
+                print(f"🎨 アイキャッチ画像設定完了")
+            else:
+                print(f"⚠️ アイキャッチ画像設定に失敗")
+                
+        except Exception as e:
+            print(f"❌ アイキャッチ画像エラー: {str(e)}")
     
     def get_category_id(self, category_name):
         """カテゴリー名からIDを取得（存在しない場合は作成）"""
