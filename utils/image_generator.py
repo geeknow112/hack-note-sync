@@ -51,29 +51,149 @@ class ImageGenerator:
         return keywords[:3]  # 最大3個
     
     def search_unsplash_image(self, keywords):
-        """Unsplash APIで画像を検索"""
-        # より安定したデモ画像URL
-        demo_images = {
-            'aws': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&w=1200&q=80',
-            'lambda': 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1200&q=80',
-            'python': 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-4.0.3&w=1200&q=80',
-            'docker': 'https://images.unsplash.com/photo-1605745341112-85968b19335b?ixlib=rb-4.0.3&w=1200&q=80',
-            'github': 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&w=1200&q=80',
-            'wordpress': 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&w=1200&q=80',
-            'javascript': 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-4.0.3&w=1200&q=80',
-            'server': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&w=1200&q=80',
-            'development': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&w=1200&q=80',
-            'automation': 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&w=1200&q=80',
-            'default': 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1200&q=80'
+        """複数サービスから画像を取得（フォールバック付き）"""
+        import random
+        
+        # 複数サービスの画像プロバイダー
+        image_providers = {
+            'unsplash': self.get_unsplash_images(),
+            'pixabay': self.get_pixabay_images(),
+            'pexels': self.get_pexels_images()
         }
         
-        # キーワードマッチング
-        for keyword in keywords:
-            if keyword.lower() in demo_images:
-                return demo_images[keyword.lower()]
+        # キーワードからカテゴリーを特定
+        category = self.determine_category_from_keywords(keywords)
         
-        # キーワードがない場合はデフォルト
-        return demo_images['default']
+        # プロバイダーをランダムに試行
+        providers = list(image_providers.keys())
+        random.shuffle(providers)
+        
+        for provider in providers:
+            try:
+                if category in image_providers[provider]:
+                    image_url = random.choice(image_providers[provider][category])
+                    # 画像の可用性をテスト
+                    if self.test_image_availability(image_url):
+                        print(f"📸 画像取得: {provider}")
+                        return image_url
+            except Exception as e:
+                print(f"⚠️ {provider}エラー: {str(e)}")
+                continue
+        
+        # 全て失敗した場合のフォールバック
+        return self.get_fallback_image()
+    
+    def get_unsplash_images(self):
+        """Unsplash画像セット"""
+        return {
+            'AWS': [
+                'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1200&q=80'
+            ],
+            'Docker': [
+                'https://images.unsplash.com/photo-1605745341112-85968b19335b?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&w=1200&q=80'
+            ],
+            'GitHub': [
+                'https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&w=1200&q=80'
+            ],
+            'その他': [
+                'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&w=1200&q=80',
+                'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&w=1200&q=80'
+            ]
+        }
+    
+    def get_pixabay_images(self):
+        """Pixabay画像セット"""
+        return {
+            'AWS': [
+                'https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_1280.jpg',
+                'https://cdn.pixabay.com/photo/2020/12/11/16/24/technology-5824678_1280.jpg',
+                'https://cdn.pixabay.com/photo/2018/09/27/09/22/artificial-intelligence-3706562_1280.jpg'
+            ],
+            'Docker': [
+                'https://cdn.pixabay.com/photo/2018/01/17/20/22/analytics-3088958_1280.jpg',
+                'https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png',
+                'https://cdn.pixabay.com/photo/2018/05/04/20/01/website-3374825_1280.jpg'
+            ],
+            'GitHub': [
+                'https://cdn.pixabay.com/photo/2015/05/29/09/04/code-788648_1280.jpg',
+                'https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg',
+                'https://cdn.pixabay.com/photo/2017/06/23/10/48/code-2434271_1280.jpg'
+            ],
+            'その他': [
+                'https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_1280.jpg',
+                'https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png'
+            ]
+        }
+    
+    def get_pexels_images(self):
+        """Pexels画像セット"""
+        return {
+            'AWS': [
+                'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200'
+            ],
+            'Docker': [
+                'https://images.pexels.com/photos/1181472/pexels-photo-1181472.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=1200'
+            ],
+            'GitHub': [
+                'https://images.pexels.com/photos/270373/pexels-photo-270373.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1200'
+            ],
+            'その他': [
+                'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1200'
+            ]
+        }
+    
+    def test_image_availability(self, image_url):
+        """画像の可用性をテスト"""
+        try:
+            response = requests.head(image_url, timeout=5)
+            return response.status_code == 200
+        except:
+            return False
+    
+    def get_fallback_image(self):
+        """フォールバック画像（最後の手段）"""
+        return 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1200&q=80'
+    
+    def determine_category_from_keywords(self, keywords):
+        """キーワードからカテゴリーを判定"""
+        category_mapping = {
+            'AWS': ['aws', 'lambda', 'ec2', 's3', 'server'],
+            'Docker': ['docker', 'container'],
+            'GitHub': ['github', 'git', 'development'],
+            'Python': ['python', 'django', 'flask'],
+            'JavaScript': ['javascript', 'js', 'node', 'react', 'vue'],
+            'WordPress': ['wordpress', 'wp'],
+            'TradingView': ['tradingview', 'trading'],
+            'AI・機械学習': ['ai', 'ml', 'machine', 'learning'],
+            'インフラ': ['infra', 'nginx', 'apache']
+        }
+        
+        for keyword in keywords:
+            for category, patterns in category_mapping.items():
+                if keyword.lower() in patterns:
+                    return category
+        
+        return 'その他'
     
     def download_image(self, image_url):
         """画像をダウンロード"""
