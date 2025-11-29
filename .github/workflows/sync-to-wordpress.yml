@@ -1,9 +1,14 @@
-name: Sync to WordPress
+name: Sync to WordPress (DISABLED)
 
+# DISABLED: 一括投稿問題により無効化
+# on:
+#   push:
+#     branches: [ main ]
+#     paths: [ 'articles/**' ]
+#   workflow_dispatch:
+
+# 手動実行のみ許可
 on:
-  push:
-    branches: [ main ]
-    paths: [ 'articles/**' ]
   workflow_dispatch:
 
 jobs:
@@ -11,44 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-        
-    - name: Install dependencies
+    - name: Safety Check
       run: |
-        pip install requests pyyaml
-        
-    - name: Create config from secrets
-      run: |
-        cat > config.yaml << EOF
-        wordpress:
-          url: "${{ secrets.WP_URL }}"
-          username: "${{ secrets.WP_USERNAME }}"
-          password: "${{ secrets.WP_PASSWORD }}"
-        sync:
-          articles_dir: "./articles"
-          log_file: "./sync_log.json"
-        github:
-          repository: "geeknow112/hack-note-sync"
-          branch: "main"
-        seo:
-          default_description: "企業の業務効率化に役立つ技術情報をお届けします。"
-          site_name: "Hack Note"
-          author: "geeknow112"
-        EOF
-        
-    - name: Sync articles to WordPress
-      run: python sync_to_wordpress.py
-      
-    - name: Commit sync log
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add sync_log.json
-        git diff --staged --quiet || git commit -m "Update sync log [skip ci]"
-        git push
+        echo "⚠️ このワークフローは安全性確認のため無効化されています"
+        echo "手動で安全な同期スクリプトを使用してください"
+        exit 1
