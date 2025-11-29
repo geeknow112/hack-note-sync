@@ -1,138 +1,160 @@
 # Hack Note Sync
 
-GitHub リポジトリの記事を WordPress に自動同期するシステム
+WordPress自動同期システム - GitHubからWordPressへの記事自動投稿システム
 
-## 🚀 機能
+## 🚀 概要
 
-- **自動同期**: GitHub にコミットすると WordPress に自動投稿
-- **差分検出**: 変更されたファイルのみ同期
-- **カテゴリー自動分類**: ファイル名から適切なカテゴリーを推定
-- **SEO最適化**: メタディスクリプション、タグの自動生成
-- **英語パーマリンク**: ファイル名から英語スラッグを自動生成
-- **Markdown→HTML変換**: WordPress表示用に自動変換
-- **エラーハンドリング**: 詳細なログとエラー報告
+このプロジェクトは、GitHubリポジトリに保存されたMarkdown記事を自動的にWordPressサイトに同期・投稿するシステムです。記事の作成から公開まで完全自動化し、技術ブログの運用効率を大幅に向上させます。
 
-## 📁 ディレクトリ構造
+## ✨ 主要機能
+
+### 📝 記事管理
+- **Markdown記事作成**: `articles/`フォルダでの記事管理
+- **自動HTML変換**: Markdown記法からWordPress対応HTMLへの変換
+- **英語スラッグ生成**: SEO対応の自動URL生成
+- **カテゴリー自動分類**: ファイル名からの技術カテゴリー推定
+
+### 🎨 アイキャッチ画像
+- **自動画像生成**: 記事内容に応じたアイキャッチ画像の自動設定
+- **複数プロバイダー対応**: Unsplash + Pixabay + Pexels
+- **フォールバック機能**: 画像取得失敗時の自動切り替え
+- **カテゴリー統一**: 技術分野ごとの一貫したデザインテーマ
+
+### 🔒 安全性
+- **下書き投稿**: 自動投稿は下書きステータスで安全確認
+- **品質チェック**: 最小文字数・タイトル必須などの品質フィルター
+- **事前確認**: 投稿前のプレビュー・承認機能
+- **差分検出**: 変更された記事のみを処理
+
+## 📁 プロジェクト構造
 
 ```
 hack-note-sync/
-├── articles/           # Markdown記事ファイル
-├── code/              # サンプルコード
-├── scripts/           # 投稿・修正用スクリプト
-├── tests/             # テスト用スクリプト
-├── utils/             # ユーティリティ関数
-├── .github/workflows/ # GitHub Actions設定
-├── sync_to_wordpress.py # メイン同期スクリプト
-├── config.yaml        # 設定ファイル
-├── main.py            # 実行ファイル
-└── requirements.txt   # 依存関係
+├── articles/                    # Markdown記事ファイル
+├── utils/
+│   └── image_generator.py      # アイキャッチ画像生成
+├── scripts/
+│   ├── add_featured_images.py  # 一括画像追加
+│   └── emergency_cleanup.py    # 緊急クリーンアップ
+├── sync_to_wordpress.py        # メイン同期スクリプト（無効化済み）
+├── sync_to_wordpress_safe.py   # 安全版同期スクリプト
+├── config.yaml                 # 設定ファイル
+└── sync_log.json              # 同期ログ
 ```
 
-## ⚙️ セットアップ
+## 🛠️ セットアップ
 
-### 1. WordPress設定
-
-1. WordPress管理画面でアプリケーションパスワードを生成
-2. REST APIが有効になっていることを確認
-
-### 2. GitHub Secrets設定
-
-リポジトリの Settings > Secrets で以下を設定:
-
-- `WP_URL`: WordPressサイトURL (https://hack-note.com)
-- `WP_USERNAME`: WordPressユーザー名
-- `WP_PASSWORD`: アプリケーションパスワード
-
-### 3. ローカル実行
-
+### 1. 依存関係のインストール
 ```bash
-# 依存関係インストール
-pip install -r requirements.txt
-
-# 設定ファイル編集
-cp config.yaml.example config.yaml
-# config.yamlを編集
-
-# 同期実行
-python main.py
+pip install requests pyyaml
 ```
 
-## 📝 記事の追加方法
+### 2. 設定ファイルの作成
+```yaml
+# config.yaml
+wordpress:
+  url: "https://your-site.com"
+  username: "your-username"
+  password: "your-app-password"
 
-1. `articles/` ディレクトリに Markdown ファイルを追加
-2. ファイル名で自動カテゴリー分類:
-   - `aws-*.md` → AWS カテゴリー
-   - `python-*.md` → Python カテゴリー
-   - `docker-*.md` → Docker カテゴリー
-3. Git にコミット・プッシュで自動同期
+sync:
+  articles_dir: "./articles"
+  log_file: "./sync_log.json"
 
-## 🔄 同期の仕組み
+seo:
+  default_description: "企業の業務効率化に役立つ技術情報をお届けします。"
+  site_name: "Your Site Name"
+  author: "Your Name"
+```
 
-1. **ファイル変更検出**: MD5ハッシュで変更を検出
-2. **メタデータ抽出**: タイトル、カテゴリー、タグを自動生成
-3. **英語スラッグ生成**: ファイル名から SEO フレンドリーな URL を作成
-4. **Markdown→HTML変換**: WordPress 表示用に自動変換
-5. **WordPress投稿**: REST API経由で投稿/更新
-6. **ログ記録**: 同期状況を `sync_log.json` に記録
+### 3. WordPress設定
+- アプリケーションパスワードの生成
+- REST API の有効化確認
 
-## 📊 カテゴリー自動分類
+## 🚀 使用方法
 
-| ファイル名パターン | カテゴリー |
-|------------------|-----------|
-| aws-* | AWS |
-| python-* | Python |
-| docker-* | Docker |
-| github-* | GitHub |
-| ai-* | AI・機械学習 |
-| tradingview-* | TradingView |
+### 安全な記事同期
+```bash
+# 事前確認付きの安全な同期
+python3 sync_to_wordpress_safe.py
+```
 
-## 🛠️ トラブルシューティング
+### アイキャッチ画像の一括追加
+```bash
+# 既存記事への画像追加
+python3 scripts/add_featured_images.py
+```
 
-### 認証エラー
-- アプリケーションパスワードを再生成
-- WordPress REST APIの有効性を確認
+## 📊 ワークフロー
 
-### 同期エラー
-- `sync_log.json` でエラー詳細を確認
-- ファイル形式（UTF-8, Markdown）を確認
+1. **記事作成**: `articles/`フォルダにMarkdownファイルを作成
+2. **品質チェック**: 自動的な記事品質検証
+3. **プレビュー**: 投稿予定記事の確認
+4. **承認**: ユーザーによる投稿承認
+5. **投稿**: WordPressに下書きとして投稿
+6. **画像設定**: アイキャッチ画像の自動生成・設定
+7. **手動公開**: 管理画面での最終確認・公開
 
-## ⚠️ 重要な教訓・注意事項
+## 🎯 対応技術カテゴリー
 
-### パーマリンク設定
-- **必須**: WordPressのパーマリンク設定を「投稿名」にする
-- **理由**: 日本語URLはSEOに不利、英語URLが推奨
-- **対策**: システムが自動で英語スラッグを生成
+- **AWS**: Lambda, EC2, S3等のクラウドサービス
+- **Docker**: コンテナ技術・デプロイメント
+- **GitHub**: バージョン管理・CI/CD
+- **Python**: プログラミング・データサイエンス
+- **JavaScript**: ウェブ開発・フロントエンド
+- **WordPress**: CMS・ウェブサイト構築
+- **TradingView**: 金融・チャート分析
+- **AI・機械学習**: 人工知能・データ分析
+- **インフラ**: サーバー・ネットワーク
 
-### Markdown記法の処理
-- **問題**: WordPressはMarkdownを直接表示できない
-- **解決**: システムが自動でHTML変換を実行
-- **注意**: 複雑なMarkdown記法は手動調整が必要な場合あり
+## 🔧 技術仕様
+
+### 画像プロバイダー
+- **Unsplash**: 高品質技術系画像
+- **Pixabay**: 豊富な無料画像ライブラリ
+- **Pexels**: プロフェッショナル画像
 
 ### WordPress REST API
-- **確認事項**: WordPress 5.6以降で標準搭載
-- **認証**: アプリケーションパスワード必須
-- **権限**: 投稿者以上の権限が必要
+- 記事投稿: `/wp-json/wp/v2/posts`
+- メディア管理: `/wp-json/wp/v2/media`
+- カテゴリー管理: `/wp-json/wp/v2/categories`
 
-### 既存投稿の修正
-- **スラッグ変更**: 既存投稿のURLを変更する場合はリダイレクト設定推奨
-- **一括修正**: 大量の投稿修正時はバックアップ必須
-- **SEO影響**: URL変更はSEOに影響するため慎重に実施
+## 🚨 安全機能
 
-## 📈 今後の拡張予定
+### 品質チェック
+- 最小文字数: 500文字以上
+- タイトル必須: H1見出しの存在確認
+- ファイル形式: Markdownファイルのみ処理
 
-- [ ] 画像の自動アップロード
-- [ ] 記事の自動削除同期
-- [ ] 複数サイト対応
-- [ ] 記事テンプレート機能
+### 投稿制御
+- 下書きステータス: 自動投稿は非公開
+- 事前確認: 投稿前のユーザー承認
+- 差分検出: 変更ファイルのみ処理
 
-## 🤝 貢献
+## 📈 今後の予定
 
-1. Fork this repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Create Pull Request
+- [ ] S3ストレージ対応
+- [ ] GitHub Actions復旧
+- [ ] 記事内容の自動生成改善
+- [ ] SEO最適化強化
+- [ ] 投稿スケジューリング機能
+
+## 🤝 コントリビューション
+
+1. このリポジトリをフォーク
+2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを作成
+
+## 📄 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+## 📞 サポート
+
+問題や質問がある場合は、GitHubのIssuesページでお知らせください。
 
 ---
 
-**Hack Note** - 企業の業務効率化のための技術情報サイト
+*企業の業務効率化に役立つ技術情報の自動配信システム*
