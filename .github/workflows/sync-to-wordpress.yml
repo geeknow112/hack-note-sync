@@ -1,14 +1,10 @@
-name: Sync to WordPress (DISABLED)
+name: Sync to WordPress (SAFE MODE)
 
-# DISABLED: 一括投稿問題により無効化
-# on:
-#   push:
-#     branches: [ main ]
-#     paths: [ 'articles/**' ]
-#   workflow_dispatch:
-
-# 手動実行のみ許可
+# 安全な自動同期 - 下書きモードのみ
 on:
+  push:
+    branches: [ main ]
+    paths: [ 'articles/**' ]
   workflow_dispatch:
 
 jobs:
@@ -16,8 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Safety Check
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
       run: |
-        echo "⚠️ このワークフローは安全性確認のため無効化されています"
-        echo "手動で安全な同期スクリプトを使用してください"
-        exit 1
+        pip install requests pyyaml
+    
+    - name: Safe WordPress Sync
+      env:
+        WP_URL: ${{ secrets.WP_URL }}
+        WP_USER: ${{ secrets.WP_USER }}
+        WP_PASS: ${{ secrets.WP_PASS }}
+      run: |
+        echo "🔍 安全な同期を開始..."
+        python sync_to_wordpress_safe.py
+        echo "✅ 下書きとして同期完了"
